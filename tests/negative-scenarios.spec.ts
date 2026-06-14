@@ -1,52 +1,29 @@
-import 'dotenv/config';
-import { test, expect } from '@playwright/test';
-import { LoginPage } from '../pages/LoginPage';
-import { InventoryPage } from '../pages/InventoryPage';
+import { test, expect } from '../fixtures';
 import { CheckoutPage } from '../pages/CheckoutPage';
 
 test.describe('Cenários Negativos', () => {
 
-  test('logout retorna para a tela de login', async ({ page }) => {
-    const loginPage = new LoginPage(page);
-    const inventoryPage = new InventoryPage(page);
-
-    await loginPage.goto();
-    await loginPage.login(process.env.USER_STANDARD!, process.env.USER_PASSWORD!);
-
-    await expect(page).toHaveURL(/inventory/);
-
-    await inventoryPage.logout();
+  test('logout retorna para a tela de login @smoke', async ({ page, loggedInPage }) => {
+    await loggedInPage.logout();
 
     await expect(page).toHaveURL(process.env.BASE_URL!);
     await expect(page.getByPlaceholder('Username')).toBeVisible();
   });
 
-  test('carrinho vazio não permite checkout', async ({ page }) => {
-    const loginPage = new LoginPage(page);
-    const inventoryPage = new InventoryPage(page);
+  test('carrinho vazio não permite checkout @regression', async ({ page, loggedInPage }) => {
+    await loggedInPage.goToCart();
 
-    await loginPage.goto();
-    await loginPage.login(process.env.USER_STANDARD!, process.env.USER_PASSWORD!);
-
-    await inventoryPage.goToCart();
-
-    await expect(inventoryPage.cartBadge).not.toBeVisible();
+    await expect(loggedInPage.cartBadge).not.toBeVisible();
     await expect(page.locator('.cart_item')).toHaveCount(0);
   });
 
-  test('checkout sem preencher dados mostra erro', async ({ page }) => {
-    const loginPage = new LoginPage(page);
-    const inventoryPage = new InventoryPage(page);
+  test('checkout sem preencher dados mostra erro @regression', async ({ page, loggedInPage }) => {
     const checkoutPage = new CheckoutPage(page);
 
-    await loginPage.goto();
-    await loginPage.login(process.env.USER_STANDARD!, process.env.USER_PASSWORD!);
-
-    await inventoryPage.addFirstProductToCart();
-    await inventoryPage.goToCart();
+    await loggedInPage.addFirstProductToCart();
+    await loggedInPage.goToCart();
 
     await checkoutPage.clickContinueWithoutData();
-
     await checkoutPage.expectError('First Name is required');
   });
 

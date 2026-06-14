@@ -10,6 +10,7 @@ export class InventoryPage {
   readonly productPrices: Locator;
   readonly menuButton: Locator;
   readonly logoutLink: Locator;
+  readonly removeButtons: Locator;
 
   constructor(page: Page) {
     this.page = page;
@@ -21,6 +22,7 @@ export class InventoryPage {
     this.productPrices = page.locator('.inventory_item_price');
     this.menuButton = page.locator('#react-burger-menu-btn');
     this.logoutLink = page.locator('#logout_sidebar_link');
+    this.removeButtons = page.getByRole('button', { name: 'Remove' });
   }
 
   async addFirstProductToCart() {
@@ -53,6 +55,10 @@ export class InventoryPage {
   async logout() {
   await this.menuButton.click();
   await this.logoutLink.click();
+  }
+
+  async removeFirstProductFromCart() {
+  await this.removeButtons.first().click();
   }
 
 }
