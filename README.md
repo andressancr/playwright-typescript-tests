@@ -1,14 +1,14 @@
-# 🎭 SauceDemo E2E Tests
+# SauceDemo E2E Tests
 
 Projeto de testes End-to-End (E2E) com **Playwright + TypeScript**, cobrindo fluxos de login, compra, ordenação de produtos e cenários negativos no site [SauceDemo](https://www.saucedemo.com/).
 
-🎯 **Site testado:** [SauceDemo](https://www.saucedemo.com/) — aplicação de e-commerce pública, criada especificamente para prática de automação de testes.
+**Site testado:** [SauceDemo](https://www.saucedemo.com/) — aplicação de e-commerce pública, criada especificamente para prática de automação de testes.
 
 ---
 
-## 🧪 Cenários de Teste
+## Cenários de Teste
 
-### 🔵 Login — `tests/login.spec.ts`
+### Login — `tests/login.spec.ts`
 
 Valida diferentes comportamentos de autenticação usando os usuários de teste padrão do SauceDemo.
 
@@ -19,7 +19,7 @@ Valida diferentes comportamentos de autenticação usando os usuários de teste 
 | Login com imagens incorretas | `problem_user` | Login funciona normalmente (imagens erradas são um bug visual conhecido do site) |
 | Login com atraso de performance | `performance_glitch_user` | Login funciona, mas demora mais (timeout estendido para 10s) |
 
-### 🟢 Checkout — `tests/checkout.spec.ts`
+### Checkout — `tests/checkout.spec.ts`
 
 Fluxo completo de compra, do login até a confirmação do pedido.
 
@@ -33,7 +33,7 @@ Fluxo completo de compra, do login até a confirmação do pedido.
 | 6 | Finalizar compra |
 | 7 | Verificar mensagem "Thank you for your order!" |
 
-### 🟡 Ordenação de Produtos — `tests/sort.spec.ts`
+### Ordenação de Produtos — `tests/sort.spec.ts`
 
 Valida que os filtros de ordenação da loja funcionam corretamente.
 
@@ -42,7 +42,7 @@ Valida que os filtros de ordenação da loja funcionam corretamente.
 | Ordenar por preço | Price (low to high) | Lista de preços extraída e comparada com a versão ordenada — devem ser iguais |
 | Ordenar por nome | Name (A to Z) | Lista de nomes extraída e comparada com a versão ordenada alfabeticamente |
 
-### 🔴 Cenários Negativos — `tests/negative-scenarios.spec.ts`
+### Cenários Negativos — `tests/negative-scenarios.spec.ts`
 
 Valida comportamentos de borda e tratamento de erros da aplicação.
 
@@ -54,21 +54,21 @@ Valida comportamentos de borda e tratamento de erros da aplicação.
 
 ---
 
-## 📊 Resultados dos Testes
+## Resultados dos Testes
 
 | Suíte | Arquivo | Testes | Resultado |
 |---|---|---|---|
-| 🔵 Login | `login.spec.ts` | 4 | ✅ 4 passed |
-| 🟢 Checkout | `checkout.spec.ts` | 1 | ✅ 1 passed |
-| 🟡 Ordenação | `sort.spec.ts` | 2 | ✅ 2 passed |
-| 🔴 Cenários Negativos | `negative-scenarios.spec.ts` | 3 | ✅ 3 passed |
-| **Total** | — | **10** | ✅ **10 passed** |
+| Login | `login.spec.ts` | 4 | 4 passed |
+| Checkout | `checkout.spec.ts` | 1 | 1 passed |
+| Ordenação | `sort.spec.ts` | 2 | 2 passed |
+| Cenários Negativos | `negative-scenarios.spec.ts` | 3 | 3 passed |
+| **Total** | — | **10** | **10 passed** |
 
 > Execução multi-browser: os testes rodam em **Chromium**, **Firefox** e **WebKit**, totalizando 30 execuções (10 testes × 3 browsers).
 
 ---
 
-## 📖 Entendendo a Estrutura — Page Object Model (POM)
+## Entendendo a Estrutura — Page Object Model (POM)
 
 Para evitar repetição de código e facilitar manutenção, os seletores e ações de cada tela ficam isolados em "Page Objects":
 
@@ -82,7 +82,7 @@ Para evitar repetição de código e facilitar manutenção, os seletores e aç�
 
 ---
 
-## 🔐 Variáveis de Ambiente
+## Variáveis de Ambiente
 
 As credenciais e a URL base do projeto ficam centralizadas em um arquivo `.env` (não versionado), evitando dados sensíveis "hardcoded" no código.
 
@@ -99,11 +99,11 @@ USER_PASSWORD=secret_sauce
 BASE_URL=https://www.saucedemo.com/
 ```
 
-> ⚠️ O arquivo `.env` está no `.gitignore` e **não é enviado ao repositório**. Cada pessoa que clonar o projeto precisa criar o seu próprio.
+> O arquivo `.env` está no `.gitignore` e **não é enviado ao repositório**. Cada pessoa que clonar o projeto precisa criar o seu próprio.
 
 ---
 
-## ▶️ Executar Localmente
+## Executar Localmente
 
 ### Pré-requisitos
 
@@ -166,7 +166,7 @@ npx playwright show-report
 
 ---
 
-## 🖥️ Modo UI Interativo
+## Modo UI Interativo
 
 O Playwright tem uma interface visual para rodar, debugar e inspecionar testes em tempo real:
 
@@ -184,11 +184,11 @@ npx playwright test --ui
 | **Timeline / Trace Viewer** | Mostra cada ação (`goto`, `fill`, `click`...) com um screenshot da tela naquele momento exato |
 | **Pick Locator** | Permite testar seletores ao vivo, clicando em elementos da página |
 
-> 💡 Esse modo é ideal para **debugar falhas**: você vê exatamente em qual passo o teste quebrou e como a tela estava naquele momento, sem precisar adicionar `console.log`.
+> Esse modo é ideal para **debugar falhas**: você vê exatamente em qual passo o teste quebrou e como a tela estava naquele momento, sem precisar adicionar `console.log`.
 
 ---
 
-## 🔁 CI/CD — GitHub Actions
+## CI/CD — GitHub Actions
 
 O projeto já vem com um workflow configurado em `.github/workflows/playwright.yml`, que executa automaticamente a cada `push` ou `pull request` na branch `main`.
 
@@ -201,7 +201,7 @@ O projeto já vem com um workflow configurado em `.github/workflows/playwright.y
 5. Executa todos os testes
 6. Publica o relatório HTML como artifact (disponível por 30 dias)
 
-> ⚠️ As variáveis de ambiente do `.env` precisam ser configuradas como **Secrets** no repositório do GitHub (`Settings > Secrets and variables > Actions`) para o pipeline funcionar.
+> As variáveis de ambiente do `.env` precisam ser configuradas como **Secrets** no repositório do GitHub (`Settings > Secrets and variables > Actions`) para o pipeline funcionar.
 
 ### Ver os resultados
 
@@ -209,7 +209,7 @@ Acesse a aba **Actions** do repositório no GitHub após qualquer push para acom
 
 ---
 
-## 📁 Estrutura do Projeto
+## Estrutura do Projeto
 
 ```
 testes-saucedemo/
@@ -236,7 +236,7 @@ testes-saucedemo/
 
 ---
 
-## 🛠️ Tecnologias Utilizadas
+## Tecnologias Utilizadas
 
 | Tecnologia | Função no Projeto |
 |---|---|
@@ -252,7 +252,7 @@ testes-saucedemo/
 
 ---
 
-## 🚀 Subindo este projeto para o GitHub
+## Subindo este projeto para o GitHub
 
 ### 1. Confirmar o `.gitignore`
 
@@ -297,12 +297,3 @@ git push -u origin main
 Acesse a aba **Actions** no GitHub — o workflow `playwright.yml` deve disparar automaticamente e rodar todos os testes na nuvem.
 
 ---
-
-## ✅ Próximos Passos Sugeridos
-
-- [ ] Adicionar testes para os demais usuários do SauceDemo (`error_user`, `visual_user`)
-- [ ] Adicionar testes de remoção de produtos do carrinho
-- [ ] Adicionar testes de responsividade (mobile viewport)
-- [ ] Adicionar fixtures customizadas para reduzir repetição de login
-- [ ] Adicionar tags (`@smoke`, `@regression`) para rodar subconjuntos de testes
-- [ ] Integrar relatório com Allure ou publicar HTML report no GitHub Pages
