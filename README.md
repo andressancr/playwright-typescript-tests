@@ -297,12 +297,3 @@ git push -u origin main
 Acesse a aba **Actions** no GitHub — o workflow `playwright.yml` deve disparar automaticamente e rodar todos os testes na nuvem.
 
 ---
-
-## Próximos Passos Sugeridos
-
-- [ ] Adicionar testes para os demais usuários do SauceDemo (`error_user`, `visual_user`)
-- [ ] Adicionar testes de remoção de produtos do carrinho
-- [ ] Adicionar testes de responsividade (mobile viewport)
-- [ ] Adicionar fixtures customizadas para reduzir repetição de login
-- [ ] Adicionar tags (`@smoke`, `@regression`) para rodar subconjuntos de testes
-- [ ] Integrar relatório com Allure ou publicar HTML report no GitHub Pages
